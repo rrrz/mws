@@ -20,6 +20,8 @@
 interface  MarketplaceWebServiceProducts_Interface
 {
 
+    public function getMyFeesEstimate($request);
+
     /**
      * Get Competitive Pricing For ASIN
      * Gets competitive pricing and related information for a product identified by

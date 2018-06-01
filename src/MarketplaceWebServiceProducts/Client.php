@@ -51,6 +51,59 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
 
 
     /**
+     * Get My Fees Estimate
+     * Retrieves the fees estimate for the
+     *         products identified by the given
+     *         ASIN/SKU list.
+     *
+     * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetMyFeesEstimate request or MarketplaceWebServiceProducts_Model_GetMyFeesEstimate object itself
+     * @see MarketplaceWebServiceProducts_Model_GetMyFeesEstimateRequest
+     * @return MarketplaceWebServiceProducts_Model_GetMyFeesEstimateResponse
+     *
+     * @throws MarketplaceWebServiceProducts_Exception
+     */
+    public function getMyFeesEstimate($request)
+    {
+        if (!($request instanceof MarketplaceWebServiceProducts_Model_GetMyFeesEstimateRequest)) {
+            require_once (dirname(__FILE__) . '/Model/GetMyFeesEstimateRequest.php');
+            $request = new MarketplaceWebServiceProducts_Model_GetMyFeesEstimateRequest($request);
+        }
+        $parameters = $request->toQueryParameterArray();
+        $parameters['Action'] = 'GetMyFeesEstimate';
+        $httpResponse = $this->_invoke($parameters);
+
+        require_once (dirname(__FILE__) . '/Model/GetMyFeesEstimateResponse.php');
+        $response = MarketplaceWebServiceProducts_Model_GetMyFeesEstimateResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+
+    /**
+     * Convert GetMyFeesEstimateRequest to name value pairs
+     */
+    private function _convertGetMyFeesEstimate($request) {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetMyFeesEstimate';
+        if ($request->isSetSellerId()) {
+            $parameters['SellerId'] =  $request->getSellerId();
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] =  $request->getMWSAuthToken();
+        }
+        if ($request->isSetFeesEstimateRequestList()) {
+            $FeesEstimateRequestListGetMyFeesEstimateRequest = $request->getFeesEstimateRequestList();
+            foreach  ($FeesEstimateRequestListGetMyFeesEstimateRequest->getFeesEstimateRequest() as $FeesEstimateRequestFeesEstimateRequestListIndex => $FeesEstimateRequestFeesEstimateRequestList) {
+                $parameters['FeesEstimateRequestList' . '.' . 'FeesEstimateRequest' . '.'  . ($FeesEstimateRequestFeesEstimateRequestListIndex + 1)] =  $FeesEstimateRequestFeesEstimateRequestList;
+            }
+        }
+
+        return $parameters;
+    }
+
+
+    /**
      * Get Competitive Pricing For ASIN
      * Gets competitive pricing and related information for a product identified by
      * the MarketplaceId and ASIN.

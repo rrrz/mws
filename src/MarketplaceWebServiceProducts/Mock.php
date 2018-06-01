@@ -21,6 +21,11 @@ class MarketplaceWebServiceProducts_Mock implements MarketplaceWebServiceProduct
 {
     // Public API ------------------------------------------------------------//
 
+    public function getMyFeesEstimate($request)
+    {
+        return MarketplaceWebServiceProducts_Model_GetMyFeesEstimateResponse::fromXML($this->_invoke('GetMyFeesEstimate'));
+    }
+
     /**
      * Get Competitive Pricing For ASIN
      * Gets competitive pricing and related information for a product identified by
