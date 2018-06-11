@@ -21,6 +21,24 @@ class MarketplaceWebServiceProducts_Mock implements MarketplaceWebServiceProduct
 {
     // Public API ------------------------------------------------------------//
 
+
+    /**
+     * Get Lowest Priced Offers For ASIN
+     * Retrieves the lowest priced offers based on the product identified by the given
+     *     ASIN.
+     *
+     * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASIN request or MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASIN object itself
+     * @see MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASIN
+     * @return MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse
+     *
+     * @throws MarketplaceWebServiceProducts_Exception
+     */
+    public function getLowestPricedOffersForASIN($request)
+    {
+        require_once (dirname(__FILE__) . '/Model/GetLowestPricedOffersForASINResponse.php');
+        return MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse::fromXML($this->_invoke('GetLowestPricedOffersForASIN'));
+    }
+
     public function getMyFeesEstimate($request)
     {
         return MarketplaceWebServiceProducts_Model_GetMyFeesEstimateResponse::fromXML($this->_invoke('GetMyFeesEstimate'));

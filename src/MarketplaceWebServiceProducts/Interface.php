@@ -20,6 +20,19 @@
 interface  MarketplaceWebServiceProducts_Interface
 {
 
+    /**
+     * Get Lowest Priced Offers For ASIN
+     * Retrieves the lowest priced offers based on the product identified by the given
+     *     ASIN.
+     *
+     * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASIN request or MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASIN object itself
+     * @see MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINRequest
+     * @return MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse
+     *
+     * @throws MarketplaceWebServiceProducts_Exception
+     */
+    public function getLowestPricedOffersForASIN($request);
+
     public function getMyFeesEstimate($request);
 
     /**

@@ -51,6 +51,60 @@ class MarketplaceWebServiceProducts_Client implements MarketplaceWebServiceProdu
 
 
     /**
+     * Get Lowest Priced Offers For ASIN
+     * Retrieves the lowest priced offers based on the product identified by the given
+     *     ASIN.
+     *
+     * @param mixed $request array of parameters for MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASIN request or MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASIN object itself
+     * @see MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINRequest
+     * @return MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse
+     *
+     * @throws MarketplaceWebServiceProducts_Exception
+     */
+    public function getLowestPricedOffersForASIN($request)
+    {
+        if (!($request instanceof MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINRequest)) {
+            require_once (dirname(__FILE__) . '/Model/GetLowestPricedOffersForASINRequest.php');
+            $request = new MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINRequest($request);
+        }
+        $parameters = $request->toQueryParameterArray();
+        $parameters['Action'] = 'GetLowestPricedOffersForASIN';
+        $httpResponse = $this->_invoke($parameters);
+
+        require_once (dirname(__FILE__) . '/Model/GetLowestPricedOffersForASINResponse.php');
+        $response = MarketplaceWebServiceProducts_Model_GetLowestPricedOffersForASINResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+
+    /**
+     * Convert GetLowestPricedOffersForASINRequest to name value pairs
+     */
+    private function _convertGetLowestPricedOffersForASIN($request) {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetLowestPricedOffersForASIN';
+        if ($request->isSetSellerId()) {
+            $parameters['SellerId'] =  $request->getSellerId();
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] =  $request->getMWSAuthToken();
+        }
+        if ($request->isSetMarketplaceId()) {
+            $parameters['MarketplaceId'] =  $request->getMarketplaceId();
+        }
+        if ($request->isSetASIN()) {
+            $parameters['ASIN'] =  $request->getASIN();
+        }
+        if ($request->isSetItemCondition()) {
+            $parameters['ItemCondition'] =  $request->getItemCondition();
+        }
+
+        return $parameters;
+    }
+
+    /**
      * Get My Fees Estimate
      * Retrieves the fees estimate for the
      *         products identified by the given
